@@ -25,7 +25,8 @@ def test():
 
 
 
-class CocoPart(Enum):
+#class CocoPart(Enum):
+class CocoPart():
     Nose = 0
     Neck = 1
     RShoulder = 2
@@ -56,7 +57,7 @@ CocoPairs = [
 ]   # = 19
 CocoPairsRender = CocoPairs[:-2]
 
-thickness= 4
+thickness = 4
 
 # source: https://github.com/ildoonet/tf-pose-estimation/blob/master/src/estimator.py
 def draw_humans(npimg, humans, imgcopy=False):
@@ -71,7 +72,7 @@ def draw_humans(npimg, humans, imgcopy=False):
         for human in humans:
 
             # draw point
-            for i in range(CocoPart.Background.value):
+            for i in range(CocoPart.Background):
 
                 body_part = human[i]
 
@@ -88,13 +89,15 @@ def draw_humans(npimg, humans, imgcopy=False):
                 #     continue
 
                 # npimg = cv2.line(npimg, centers[pair[0]], centers[pair[1]], common.CocoColors[pair_order], 3)
+                print("##############################")
+                print(centers[pair[0]], centers[pair[1]], CocoColors[pair_order])
                 cv2.line(npimg, centers[pair[0]], centers[pair[1]], CocoColors[pair_order], thickness=thickness)
 
 
         return npimg
     else: # single-person pose  (no list, but plain np.array)
         # draw point
-        for i in range(CocoPart.Background.value):
+        for i in range(CocoPart.Background):
 
             body_part = humans[i]
 
@@ -110,11 +113,11 @@ def draw_humans(npimg, humans, imgcopy=False):
 
         # draw line
         for pair_order, pair in enumerate(CocoPairsRender):
-            # if pair[0] not in human.body_parts.keys() or pair[1] not in human.body_parts.keys():
-            #     continue
+            if pair[0] not in centers.keys() or pair[1] not in centers.keys():
+                continue
 
             # npimg = cv2.line(npimg, centers[pair[0]], centers[pair[1]], common.CocoColors[pair_order], 3)
-            cv2.line(npimg, centers[pair[0]], centers[pair[1]], CocoColors[pair_order], thickness=thickness-1)
+            cv2.line(npimg, centers[pair[0]], centers[pair[1]], CocoColors[pair_order], thickness = thickness-1)
 
 
     return npimg
@@ -123,7 +126,7 @@ def draw_square(npimg, features):
     centers = {}
 
     # draw point
-    for i in range(CocoPart.Background.value):
+    for i in range(CocoPart.Background):
 
         body_part = features[i]
 
@@ -134,7 +137,6 @@ def draw_square(npimg, features):
         centers[i] = center
 
         vers = 7
-
 
         cv2.rectangle(npimg, (center[0] - vers, center[1] - vers), (center[0] + vers, center[1] + vers),
                       color=[abs(CocoColors[i][0]-255),abs(CocoColors[i][1]-255),abs(CocoColors[i][2]-255)], thickness=3)

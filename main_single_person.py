@@ -1,4 +1,5 @@
 import pose_match
+import affine_transformation
 import parse_openpose_json
 import numpy as np
 import logging
@@ -23,23 +24,25 @@ input = "trap9"
 
 
 
-model = "foto1"
-input = "kleuter8"
+model = "jochen_foto1"
+#input = "kleuter8"
+input = "model5"
 model_json = json_data_path + model + '.json'
-input_json = json_data_path + input + '_keypoints.json'
-
+#input_json = json_data_path + input + '_keypoints.json'
+input_json = json_data_path + input + '.json'
 model_image = images_data_path + model + '.jpg'
-input_image = images_data_path + input + '.jpg'
+input_image = images_data_path + input + '.png'
 
-model_features = parse_openpose_json.parse_JSON_single_person(model_json)
-input_features = parse_openpose_json.parse_JSON_single_person(input_json)
-
+# model_features = parse_openpose_json.parse_JSON_single_person(model_json)
+# input_features = parse_openpose_json.parse_JSON_single_person(input_json)
+model_features = parse_openpose_json.parse_JSON_single_person('data/json_data/foto1.json')
+input_features = parse_openpose_json.parse_JSON_single_person('data/json_data/model1.json')
 '''
 Calculate match fo real (incl. normalizing)
 '''
 #TODO: edit return tuple !!
 match_result = pose_match.single_person(model_features, input_features, True)
-logger.info("--Match or not: %s  score=%f ", str(match_result.match_bool), match_result.error_score)
+#logger.info("--Match or not: %s  score=%f ", str(match_result.match_bool), match_result.error_score)
 
 
 '''
