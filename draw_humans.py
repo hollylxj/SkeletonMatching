@@ -20,40 +20,63 @@ def test():
     assert type(model_features) is list
     img = draw_humans(model_image, model_features, True)
     plt.figure()
-    plt.imshow(img)
+    plt.imshow(img)#.astype(np.uint8)
     plt.show()
 
 
 
 #class CocoPart(Enum):
 class CocoPart():
+    # Nose = 0
+    # Neck = 1
+    # RShoulder = 2
+    # RElbow = 3
+    # RWrist = 4
+    # LShoulder = 5
+    # LElbow = 6
+    # LWrist = 7
+    # RHip = 8
+    # RKnee = 9
+    # RAnkle = 10
+    # LHip = 11
+    # LKnee = 12
+    # LAnkle = 13
+    # REye = 14
+    # LEye = 15
+    # REar = 16
+    # LEar = 17
+    # Background = 18
     Nose = 0
-    Neck = 1
-    RShoulder = 2
-    RElbow = 3
-    RWrist = 4
+    LEye = 1
+    REye = 2
+    LEar = 3
+    REar = 4
     LShoulder = 5
-    LElbow = 6
-    LWrist = 7
-    RHip = 8
-    RKnee = 9
-    RAnkle = 10
+    RShoulder = 6
+    LElbow = 7
+    RElbow = 8
+    LWrist = 9
+    RWrist = 10
     LHip = 11
-    LKnee = 12
-    LAnkle = 13
-    REye = 14
-    LEye = 15
-    REar = 16
-    LEar = 17
-    Background = 18
+    RHip = 12
+    LKnee = 13
+    RKnee = 14
+    LAnkle = 15 
+    RAnkle = 16
+    #Neck = 17
+    Background = 17
 
 CocoColors = [[255, 0, 0], [255, 85, 0], [255, 170, 0], [255, 255, 0], [170, 255, 0], [85, 255, 0], [0, 255, 0],
               [0, 255, 85], [0, 255, 170], [0, 255, 255], [0, 170, 255], [0, 85, 255], [0, 0, 255], [85, 0, 255],
-              [170, 0, 255], [255, 0, 255], [255, 0, 170], [255, 0, 85]]
+              [170, 0, 255], [255, 0, 255], [255, 0, 170]]
+
+# CocoColors = [[1, 0, 0], [1, 0.33333, 0], [1, 0.666666, 0], [1, 1, 0], [0.666666, 1, 0], [0.33333, 1, 0], [0, 1, 0],
+#               [0, 1, 0.33333], [0, 1, 0.666666], [0, 1, 1], [0, 0.666666, 1], [0, 0.33333, 1], [0, 0, 1], [0.33333, 0, 1],
+#               [0.666666, 0, 1], [1, 0, 1], [1, 0, 0.666666]]
 
 CocoPairs = [
-    (1, 2), (1, 5), (2, 3), (3, 4), (5, 6), (6, 7), (1, 8), (8, 9), (9, 10), (1, 11),
-    (11, 12), (12, 13), (1, 0), (0, 14), (14, 16), (0, 15), (15, 17), (2, 16), (5, 17)
+    (0,1),(1,3),(0,2),(2,4),(0,11),(0,12),(11,13),(13,15),(12,14),(14,16),(5,6),(5,7),(7,9),(6,8),(8,10)
+
 ]   # = 19
 CocoPairsRender = CocoPairs[:-2]
 
